@@ -1,0 +1,40 @@
+Program.Sub.ScreenSU.Start
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+Program.Sub.Preflight.End
+
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.If(V.Passed.DATA-CRM-CompType,=,15)
+	V.Passed.CRM-tabPRM.Set(4)
+	V.Passed.F_CRM-chkInclHist-v.Set(1)
+	v.Passed.F_CRM-chkLoadLive-v.Set(1)
+	V.Passed.CRM-cboCustServFilter.Set("All")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4904_CRM_CustServ_Default.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+Program.Sub.Main.End
+
+
+Program.Sub.Comments.Start
+${$0$}$GCG_CRM_CustServ_Default$}$Strider$}$10/15/2015
+${$1$}$$}$$}$0$}$42903$}$CRM.NET-COMP-POPULATE$}$10/15/2015 11:25:55 AM$}$(Program: Global_Shop_CRM.exe; Screen: )
+
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This program automatically switches to the customer service tab and sets the drop down list to Customer PO after switching to the all customers drop down list in the CRM.
+Program.Sub.Comments.End
+
